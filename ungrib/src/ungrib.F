@@ -80,7 +80,7 @@ program ungrib
 
   integer :: debug_level
 
-  integer , parameter :: maxlvl = 250
+  integer , parameter :: maxlvl = 2500
 
   real , dimension(maxlvl) :: plvl, new_plvl
   integer :: iplvl

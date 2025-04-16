@@ -70,7 +70,7 @@
       character (len=9) :: my_field
       character (len=8) :: tmp8
       ! For subroutine output
-      integer , parameter :: maxlvl = 150
+      integer , parameter :: maxlvl = 2500
       real , dimension(maxlvl) :: plvl
       integer :: nlvl
       integer , dimension(maxlvl) :: level_array
@@ -290,6 +290,8 @@ C  SET ARGUMENTS
                map%source = 'NCEP CDAS CFSV2'
              elseif (iprocess.eq.25) then
                map%source = 'NCEP SNOW COVER ANALYSIS'
+             elseif (iprocess.eq.134) then
+               map%source = 'NCEP RRFS Model'
              else
                map%source = 'unknown model from NCEP'
                call mprintf(.true.,STDOUT,
@@ -417,6 +419,7 @@ C  SET ARGUMENTS
 
            elseif (gfld%igdtnum.eq.1) then ! Rotated Lat-Lon Grid.
               map%igrid = 6
+              map%grid_wind = .false.
               map%nx = gfld%igdtmpl(8)
               map%ny = gfld%igdtmpl(9)
               map%dx = gfld%igdtmpl(17)
@@ -433,8 +436,8 @@ C  SET ARGUMENTS
                 map%lon1 = map%lon1/scale_factor
                 map%lat0 = map%lat0/scale_factor
                 map%lon0 = map%lon0/scale_factor
-                map%dx = map%dx/scale_factor/1.e3
-                map%dy = map%dy/scale_factor/1.e3
+                map%dx = map%dx/scale_factor
+                map%dy = map%dy/scale_factor
               else
           ! Basic angle and subdivisions are non-zero (not tested)
                 map%lat1 = map%lat1 *
