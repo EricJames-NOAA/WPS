@@ -70,7 +70,7 @@
       character (len=9) :: my_field
       character (len=8) :: tmp8
       ! For subroutine output
-      integer , parameter :: maxlvl = 2500
+      integer , parameter :: maxlvl = 150
       real , dimension(maxlvl) :: plvl
       integer :: nlvl
       integer , dimension(maxlvl) :: level_array

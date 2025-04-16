@@ -92,7 +92,7 @@ subroutine read_namelist(hstart, hend, delta_time, ntimes,&
   io_form_geogrid = 2
   max_dom = 1
   wrf_core = 'ARW'
-  debug_level = 100
+  debug_level = 0
   nocolons = .false.
 
   add_lvls = .false.

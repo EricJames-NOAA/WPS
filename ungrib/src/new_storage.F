@@ -17,7 +17,7 @@ module storage_module
   public :: getll
 
   integer, parameter :: idlen = 9
-  integer :: verbose = 2  ! 0 = no prints; 1 = some prints; 2 = more; etc.
+  integer :: verbose = 0  ! 0 = no prints; 1 = some prints; 2 = more; etc.
 
   type node2
      character(len=idlen) :: id
@@ -146,15 +146,10 @@ contains
     SEARCH : do while (associated(nnode%next))
        nnode => nnode%next
        nlvl = nlvl + 1
-       print *, 'nlvl: ', nlvl
-       print *, 'nnode%id: ', nnode%id
-       print *, 'maxlvl: ', maxlvl
        LEVLOOP : do nn = 1, nlvl
           if (nnode%id > plvl(nn)) then
-             print *, 'NN: ', nn
              plvl(nn+1:maxlvl) = plvl(nn:maxlvl-1)
              plvl(nn) = float(nnode%id)
-             print *, 'plvl: ', plvl(nn)
              exit LEVLOOP
           endif
        enddo LEVLOOP
