@@ -419,7 +419,6 @@ C  SET ARGUMENTS
 
            elseif (gfld%igdtnum.eq.1) then ! Rotated Lat-Lon Grid.
               map%igrid = 6
-              map%grid_wind = .false.
               map%nx = gfld%igdtmpl(8)
               map%ny = gfld%igdtmpl(9)
               map%dx = gfld%igdtmpl(17)
