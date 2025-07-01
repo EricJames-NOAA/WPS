@@ -162,10 +162,6 @@ subroutine parse_table(debug_level,vtable_columns)
 
            ibar = index(string(istart:255),'|') + istart - 2
 
-           call mprintf(.true.,DEBUG,"Looping through vtable_columns:")
-           call mprintf(.true.,DEBUG," %i",i1=istart)
-           call mprintf(.true.,DEBUG," %i",i1=ibar)
-
            if (i.eq.1) then
            ! The first field is the Grib1 param code number:
 
@@ -396,16 +392,10 @@ subroutine parse_table(debug_level,vtable_columns)
                  call mprintf(.true.,ERROR,"Stopping in PARSE_TABLE")
               else
                  read(string(istart:ibar), * ) g2code(5,maxvar)
-                 call mprintf(.true.,DEBUG,"Read G2CODE(5)")
               endif
              else     ! occurs when 11 columns are in the Vtable rather than 12.
                g2code(5,maxvar) = 0
              endif
-
-           call mprintf(.true.,DEBUG,"Entering i=13")
-           call mprintf(.true.,DEBUG," %i",i1=istart)
-           call mprintf(.true.,DEBUG," %i",i1=ibar)
-           call mprintf(.true.,DEBUG," %s",s1=string(istart:ibar))
 
            elseif (i.eq.13) then
            ! The thirteenth field is the Grib2 aerosol type
@@ -427,29 +417,17 @@ subroutine parse_table(debug_level,vtable_columns)
                  call mprintf(.true.,ERROR,"Stopping in PARSE_TABLE")
               else
                  read(string(istart:ibar), * ) g2code(6,maxvar)
-                 call mprintf(.true.,DEBUG,"Read G2CODE(6)")
               endif
              else     ! occurs when 11 columns are in the Vtable rather than 13.
                g2code(6,maxvar) = 0
              endif
 
-           call mprintf(.true.,DEBUG,"Entering i=14")
-           call mprintf(.true.,DEBUG," %i",i1=istart)
-           call mprintf(.true.,DEBUG," %i",i1=ibar)
-           call mprintf(.true.,DEBUG," %s",s1=string(istart:ibar))
-
            elseif (i.eq.14) then
            ! The fourteenth field is the Grib2 aerosol size specification
-
-            call mprintf(.true.,DEBUG,"We are in i=14")
-            call mprintf(.true.,DEBUG," %i",i1=istart)
-            call mprintf(.true.,DEBUG," %i",i1=ibar)
-            call mprintf(.true.,DEBUG," %s",s1=string(istart:ibar))
 
             if (istart .lt. ibar) then
               if (string(istart:ibar) == ' ') then
                  g2code(7,maxvar) = 0
-                 call mprintf(.true.,DEBUG,"Read G2CODE(7) it's zero")
               elseif (scan(string(istart:ibar),'*') /= 0) then
                  call mprintf(.true.,STDOUT, &
                   " ERROR reading Grib2 Size ")
@@ -464,11 +442,9 @@ subroutine parse_table(debug_level,vtable_columns)
                  call mprintf(.true.,ERROR,"Stopping in PARSE_TABLE")
               else
                  read(string(istart:ibar), * ) g2code(7,maxvar)
-                 call mprintf(.true.,DEBUG,"Read G2CODE(7)")
               endif
              else     ! occurs when 11 columns are in the Vtable rather than 14.
                g2code(7,maxvar) = 0
-               call mprintf(.true.,DEBUG,"Read G2CODE(7) set to zero")
              endif
 
            endif
@@ -528,10 +504,9 @@ subroutine parse_table(debug_level,vtable_columns)
        "Read from file Vtable by subroutine PARSE_TABLE:")
      do i = 1, maxvar
         if (vtable_columns.ge.11) then
-           write(*,'(4I6, 3x,A10, 8I6)')&
+           write(*,'(4I6, 3x,A10, 5I6)')&
              gcode(i), lcode(i), level1(i), level2(i), namvar(i), &
-             g2code(1,i), g2code(2,i), g2code(3,i), g2code(4,i), g2code(5,i), g2code(6,i), &
-             g2code(7,i)
+             g2code(1,i), g2code(2,i), g2code(3,i), g2code(4,i), g2code(5,i)
 	   write(tmp9,'(i9)') gcode(i)
            call mprintf(.true.,DEBUG,'%s ',s1=tmp9(4:9),newline=.false.)
 	   write(tmp9,'(i9)') lcode(i)
