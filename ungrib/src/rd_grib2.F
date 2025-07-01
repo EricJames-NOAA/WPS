@@ -687,7 +687,9 @@ C  SET ARGUMENTS
      &          gfld%ipdtmpl(1) .eq. g2code(2,i) .and.
      &          gfld%ipdtmpl(2) .eq. g2code(3,i) .and.
      &          gfld%ipdtmpl(21) .eq. g2code(4,i) .and.
-     &          gfld%ipdtnum    .eq. g2code(5,i))) then   !Template
+     &          gfld%ipdtnum    .eq. g2code(5,i) .and.
+     &          gfld%ipdtmpl(3) .eq. g2code(6,i) .and.
+     &          gfld%ipdtmpl(4) .eq. g2code(7,i))) then   !Template
 
             call gf_free(gfld)
             call gf_getfld(cgrib,lengrib,n,.TRUE.,expand,gfld,ierr)
