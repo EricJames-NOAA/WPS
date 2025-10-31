@@ -678,11 +678,18 @@ C  SET ARGUMENTS
          MATCH_LOOP: do i=1,maxvar ! Max variables found in Vtable,
                                    ! maxvar is defined in table.mod
 
-           if ( gfld%discipline .eq. g2code(1,i) .and.   !Discipline 
+           if (( gfld%discipline .eq. g2code(1,i) .and.   !Discipline 
      &          gfld%ipdtmpl(1) .eq. g2code(2,i) .and.   !Category
      &          gfld%ipdtmpl(2) .eq. g2code(3,i) .and.   !Parameter
      &          gfld%ipdtmpl(10) .eq. g2code(4,i) .and.  !Elevation
-     &          gfld%ipdtnum    .eq. g2code(5,i)) then   !Template
+     &          gfld%ipdtnum    .eq. g2code(5,i)) .or.
+     &          (gfld%discipline .eq. g2code(1,i) .and.
+     &          gfld%ipdtmpl(1) .eq. g2code(2,i) .and.
+     &          gfld%ipdtmpl(2) .eq. g2code(3,i) .and.
+     &          gfld%ipdtmpl(21) .eq. g2code(4,i) .and.
+     &          gfld%ipdtnum    .eq. g2code(5,i) .and.
+     &          gfld%ipdtmpl(3) .eq. g2code(6,i) .and.
+     &          gfld%ipdtmpl(4) .eq. g2code(7,i))) then   !Template
 
             call gf_free(gfld)
             call gf_getfld(cgrib,lengrib,n,.TRUE.,expand,gfld,ierr)
@@ -763,6 +770,8 @@ C  SET ARGUMENTS
      &               (gfld%ipdtmpl(10).eq.150))then
                  ! Hybrid level (range from 1 to N)
                  level=gfld%ipdtmpl(12)
+              elseif((gfld%ipdtmpl(21).eq.105))then
+                 level=gfld%ipdtmpl(23)
               elseif(gfld%ipdtmpl(10).eq.104) then
                  ! Sigma level (range from 10000 to 0)
                  level=gfld%ipdtmpl(12)

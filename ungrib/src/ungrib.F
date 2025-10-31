@@ -138,7 +138,7 @@ program ungrib
     ierr=0
   endif
   if (grib_version.eq.2) then
-     vtable_columns=12 
+     vtable_columns=15
 #if defined (USE_PNG) && (USE_JPEG2000)
      call mprintf(.true.,INFORM, &
         "Linked in png and jpeg libraries for Grib Edition 2")

@@ -397,6 +397,56 @@ subroutine parse_table(debug_level,vtable_columns)
                g2code(5,maxvar) = 0
              endif
 
+           elseif (i.eq.13) then
+           ! The thirteenth field is the Grib2 aerosol type
+
+            if (istart .lt. ibar) then
+              if (string(istart:ibar) == ' ') then
+                 g2code(6,maxvar) = 0
+              elseif (scan(string(istart:ibar),'*') /= 0) then
+                 call mprintf(.true.,STDOUT, &
+                  " ERROR reading Grib2 Aerosol Type ")
+                 call mprintf(.true.,STDOUT,  &
+                    "This Grib2 Vtable line is incorrectly specified:")
+                 call mprintf(.true.,STDOUT," %s",s1=string)
+                 call mprintf(.true.,LOGFILE, &
+                  " ERROR reading Grib2 Aerosol Type ")
+                 call mprintf(.true.,LOGFILE,  &
+                    "This Grib2 Vtable line is incorrectly specified:")
+                 call mprintf(.true.,LOGFILE," %s",s1=string)
+                 call mprintf(.true.,ERROR,"Stopping in PARSE_TABLE")
+              else
+                 read(string(istart:ibar), * ) g2code(6,maxvar)
+              endif
+             else     ! occurs when 11 columns are in the Vtable rather than 13.
+               g2code(6,maxvar) = 0
+             endif
+
+           elseif (i.eq.14) then
+           ! The fourteenth field is the Grib2 aerosol size specification
+
+            if (istart .lt. ibar) then
+              if (string(istart:ibar) == ' ') then
+                 g2code(7,maxvar) = 0
+              elseif (scan(string(istart:ibar),'*') /= 0) then
+                 call mprintf(.true.,STDOUT, &
+                  " ERROR reading Grib2 Size ")
+                 call mprintf(.true.,STDOUT,  &
+                    "This Grib2 Vtable line is incorrectly specified:")
+                 call mprintf(.true.,STDOUT," %s",s1=string)
+                 call mprintf(.true.,LOGFILE, &
+                  " ERROR reading Grib2 Size ")
+                 call mprintf(.true.,LOGFILE,  &
+                    "This Grib2 Vtable line is incorrectly specified:")
+                 call mprintf(.true.,LOGFILE," %s",s1=string)
+                 call mprintf(.true.,ERROR,"Stopping in PARSE_TABLE")
+              else
+                 read(string(istart:ibar), * ) g2code(7,maxvar)
+              endif
+             else     ! occurs when 11 columns are in the Vtable rather than 14.
+               g2code(7,maxvar) = 0
+             endif
+
            endif
 
            istart = ibar + 2
