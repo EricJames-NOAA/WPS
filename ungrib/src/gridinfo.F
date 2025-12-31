@@ -30,6 +30,8 @@ module gridinfo
      real :: lon0      ! central longitude  
      real :: dx        ! grid-spacing in the X direction (km or degrees)
      real :: dy        ! grid-spacing in the Y direction (km or degrees)
+     real :: lambda
+     real :: phi
                        ! 
 		       ! The following are WPS extensions (intermediate format version 5)
      logical :: grid_wind     ! Winds are grid_relative (true) or earth-realtive(false)

@@ -159,6 +159,9 @@ subroutine rrpr(hstart, ntimes, interval, nlvl, maxlvl, plvl, &
           case (6)
            read (iunit) map%startloc, map%lat1, map%lon1, map%dy, map%dx, &
                 map%lat0,map%lon0, map%r_earth
+          case (203)
+           read (iunit) map%startloc, map%lat1, map%lon1, map%dy, map%dy, &
+                map%lat0, map%lon0, map%lambda, map%phi, map%r_earth
           case default
              call mprintf(.true.,ERROR, &
                 "Unrecognized map%%igrid: %i in RRPR 1",i1=map%igrid)
@@ -306,9 +309,13 @@ subroutine rrpr(hstart, ntimes, interval, nlvl, maxlvl, plvl, &
 
         do k = 2, nlvl-1, 1
            if (plvl(k-1) .lt. 200000.) then
+              call mprintf(.true.,INFORM, &
+    "RRPR: PLVL %i at %i Pa less than 200000", i1=int(k-1), i2=int(plvl(k-1)))
               if ( (.not. is_there(nint(plvl(k)),'UU')) .and. &
                    ( is_there(nint(plvl(k-1)), 'UU')) ) then
                  found_level = .false.
+                 call mprintf(.true.,INFORM, &
+                      "RRPR: PLVL %i is missing", i1=int(k-1))
                  uu_loop : do itest = k+1,nlvl,1
                    if ( ( is_there(nint(plvl(itest)), 'UU')) )  then
                     found_level = .true.

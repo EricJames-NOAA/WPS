@@ -428,7 +428,11 @@ C  SET ARGUMENTS
               map%lat0 = 90000000.0 + gfld%igdtmpl(20)
               map%lon0 = gfld%igdtmpl(21)
               map%lat1 = map%lat0 + gfld%igdtmpl(12)
+              !map%lat1 = -1605785.0
               map%lon1 = map%lon0 - (360000000.0 - gfld%igdtmpl(13))
+              !map%lon1 = 202671054.0
+              write(tmp8,'(b8.8)') gfld%igdtmpl(14)
+              if (tmp8(5:5) .eq. '0') map%grid_wind = .false.
               map%r_earth = earth_radius (gfld%igdtmpl(1),
      &                         gfld%igdtmpl(2),gfld%igdtmpl(3))
               call mprintf(.true.,DEBUG,"R_EARTH %f:",f1=map%r_earth)
@@ -456,6 +460,8 @@ C  SET ARGUMENTS
      & has not been tested, continuing anyway")
               endif
 
+              call mprintf(.true.,DEBUG,"BASIC ANGLE %f:",f1=gfld%igdtmpl(10))
+              call mprintf(.true.,DEBUG,"SCANNING MODE %f:",f1=gfld%igdtmpl(19))
               call mprintf(.true.,DEBUG,"LAT1 %f:",f1=map%lat1)
               call mprintf(.true.,DEBUG,"LON1 %f:",f1=map%lon1)
               call mprintf(.true.,DEBUG,"LAT0 %f:",f1=map%lat0)
