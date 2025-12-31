@@ -159,9 +159,6 @@ subroutine rrpr(hstart, ntimes, interval, nlvl, maxlvl, plvl, &
           case (6)
            read (iunit) map%startloc, map%lat1, map%lon1, map%dy, map%dx, &
                 map%lat0,map%lon0, map%r_earth
-          case (203)
-           read (iunit) map%startloc, map%lat1, map%lon1, map%dy, map%dy, &
-                map%lat0, map%lon0, map%lambda, map%phi, map%r_earth
           case default
              call mprintf(.true.,ERROR, &
                 "Unrecognized map%%igrid: %i in RRPR 1",i1=map%igrid)
