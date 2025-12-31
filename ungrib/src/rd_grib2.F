@@ -418,9 +418,7 @@ C  SET ARGUMENTS
            elseif (gfld%igdtnum.eq.1) then ! Rotated Lat-Lon Grid.
               map%igrid = 6
               map%nx = gfld%igdtmpl(8)
-              call mprintf(.true.,DEBUG,"NX %i:",i1=map%nx)
               map%ny = gfld%igdtmpl(9)
-              call mprintf(.true.,DEBUG,"NY %i:",i1=map%ny)
               map%dx = gfld%igdtmpl(17)
               map%dy = gfld%igdtmpl(18)
               ! For Rotated Lat-Lon Grid, the latitude of the southern pole (map%lat0)
@@ -435,7 +433,6 @@ C  SET ARGUMENTS
               if (tmp8(5:5) .eq. '0') map%grid_wind = .false.
               map%r_earth = earth_radius (gfld%igdtmpl(1),
      &                         gfld%igdtmpl(2),gfld%igdtmpl(3))
-              call mprintf(.true.,DEBUG,"R_EARTH %f:",f1=map%r_earth)
               if ((gfld%igdtmpl(10) .eq. 0).OR.
      &            (gfld%igdtmpl(10) .eq. 255)) THEN
                 map%lat1 = map%lat1/scale_factor
@@ -459,15 +456,6 @@ C  SET ARGUMENTS
                call mprintf(.true.,LOGFILE,"WARNING - Basic angle option 
      & has not been tested, continuing anyway")
               endif
-
-              call mprintf(.true.,DEBUG,"BASIC ANGLE %f:",f1=gfld%igdtmpl(10))
-              call mprintf(.true.,DEBUG,"SCANNING MODE %f:",f1=gfld%igdtmpl(19))
-              call mprintf(.true.,DEBUG,"LAT1 %f:",f1=map%lat1)
-              call mprintf(.true.,DEBUG,"LON1 %f:",f1=map%lon1)
-              call mprintf(.true.,DEBUG,"LAT0 %f:",f1=map%lat0)
-              call mprintf(.true.,DEBUG,"LON0 %f:",f1=map%lon0)
-              call mprintf(.true.,DEBUG,"DX %f:",f1=map%dx)
-              call mprintf(.true.,DEBUG,"DY %f:",f1=map%dy)
 
            elseif (gfld%igdtnum.eq.10) then ! Mercator Grid.
               map%igrid = 1
@@ -563,9 +551,7 @@ C  SET ARGUMENTS
            elseif (gfld%igdtnum.eq.32769) then ! Arakawa Non-E Staggered grid.
               map%igrid = 6               
               map%nx = gfld%igdtmpl(8)        
-              call mprintf(.true.,DEBUG,"NX %i:",i1=map%nx)
               map%ny = gfld%igdtmpl(9)        
-              call mprintf(.true.,DEBUG,"NY %i:",i1=map%ny)
               map%dx = gfld%igdtmpl(17)        
               map%dy = gfld%igdtmpl(18)       
               map%lat1 = gfld%igdtmpl(12)        
@@ -574,7 +560,6 @@ C  SET ARGUMENTS
               map%lon0 = gfld%igdtmpl(16)        
               map%r_earth = earth_radius (gfld%igdtmpl(1),
      &                         gfld%igdtmpl(2),gfld%igdtmpl(3))
-              call mprintf(.true.,DEBUG,"R_EARTH %f:",f1=map%r_earth)
               if ((gfld%igdtmpl(10) .eq. 0).OR.
      &            (gfld%igdtmpl(10) .eq. 255)) THEN
                 map%lat1 = map%lat1/scale_factor
@@ -598,13 +583,6 @@ C  SET ARGUMENTS
                call mprintf(.true.,LOGFILE,"WARNING - Basic angle option 
      & has not been tested, continuing anyway")
               endif
-
-              call mprintf(.true.,DEBUG,"LAT1 %f:",f1=map%lat1)
-              call mprintf(.true.,DEBUG,"LON1 %f:",f1=map%lon1)
-              call mprintf(.true.,DEBUG,"LAT0 %f:",f1=map%lat0)
-              call mprintf(.true.,DEBUG,"LON0 %f:",f1=map%lon0)
-              call mprintf(.true.,DEBUG,"DX %f:",f1=map%dx)
-              call mprintf(.true.,DEBUG,"DY %f:",f1=map%dy)
 
            else
               call mprintf(.true.,STDOUT,"GRIB2 Unknown Projection: %i",
