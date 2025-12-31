@@ -423,6 +423,10 @@ C  SET ARGUMENTS
               call mprintf(.true.,DEBUG,"NY %i:",i1=map%ny)
               map%dx = gfld%igdtmpl(17)
               map%dy = gfld%igdtmpl(18)
+              ! For Rotated Lat-Lon Grid, the latitude of the southern pole (map%lat0)
+              ! is stored as an offset from -90 degrees in the GRIB2 template.
+              ! We add 90 degrees (in microdegrees) to gfld%igdtmpl(20) to obtain the correct latitude.
+              ! This transformation is specific to this grid type and differs from other grid types.
               map%lat0 = 90000000.0 + gfld%igdtmpl(20)
               map%lon0 = gfld%igdtmpl(21)
               map%lat1 = map%lat0 + gfld%igdtmpl(12)
