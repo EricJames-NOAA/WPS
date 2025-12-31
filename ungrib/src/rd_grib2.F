@@ -430,7 +430,7 @@ C  SET ARGUMENTS
               map%lat0 = 90000000.0 + gfld%igdtmpl(20)
               map%lon0 = gfld%igdtmpl(21)
               map%lat1 = map%lat0 + gfld%igdtmpl(12)
-              map%lon1 = map%lon0 - (360000000.0 - gfld%igdtmpl(13))
+              map%lon1 = map%lon0 + gfld%igdtmpl(13) - 360000000.0
               write(tmp8,'(b8.8)') gfld%igdtmpl(14)
               if (tmp8(5:5) .eq. '0') map%grid_wind = .false.
               map%r_earth = earth_radius (gfld%igdtmpl(1),
