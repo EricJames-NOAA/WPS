@@ -67,10 +67,10 @@ subroutine read_namelist(hstart, hend, delta_time, ntimes,&
        io_form_geogrid, opt_output_from_geogrid_path, &
        debug_level, active_grid, &
        subgrid_ratio_x, subgrid_ratio_y, &
-       nocolons, rh_wrt_water
+       nocolons
 
   namelist /ungrib/ out_format, &
-       ordered_by_date, prefix, &
+       ordered_by_date, prefix, rh_wrt_water, &
        add_lvls, new_plvl, interp_type, ec_rec_len, pmin
 
   allocate(new_plvl(size(new_plvl_in)))
