@@ -56,7 +56,7 @@ subroutine rrpr(hstart, ntimes, interval, nlvl, maxlvl, plvl, &
   integer :: debug_level
 
 ! RH_WRT_WATER: Flag indicating whether RH is entirely wrt water
-  integer :: rh_wrt_water
+  logical :: rh_wrt_water
 
 !------------------------------------------------------------------------------
 
